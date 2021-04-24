@@ -7,39 +7,33 @@ var connInfo = {
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "pakkukrish@22",
+    password: "",
     database: "RA1"
 }
 
 var connection = mysql.createConnection(connInfo);
-app.get('/Candidates',(req, res) => {
-    let sql = ' select * from Candidates ';
-
-    if(req.query.id)
-    {
-        sql = sql+'where id='+req.query.id;
+app.get('/Candidates', (req, res) => {
+    let sql = 'select * from Candidates';
+    if (req.query.id) {
+        sql = sql + 'where id=' + req.query.id;
     }
-    if(req.query.candidate_name)
-    {
-        sql=' select * from Candidates where candidate_name=? ';
-        connection.query(sql,[req.query.candidate_name],(err,data) => {
-            if (err)
-            {
+    if (req.query.candidate_name) {
+        sql = 'select * from Candidates where candidate_name=?';
+        connection.query(sql, [req.query.candidate_name], (err,data) => {
+            if (err) {
                 res.send(err);
             }
             res.send(data);
         });
     }
-    if(req.query.candidate_mbl)
-    {
-        sql=sql+'where candidate_mbl='+req.query.candidate_mbl;
+    if(req.query.candidate_mbl) {
+        sql = sql + 'where candidate_mbl=' + req.query.candidate_mbl;
     }
-    connection.query(sql, function(err, data, fields){
-        if (err)
-        {
+    connection.query(sql, function(err, data, fields) {
+        if (err) {
             res.status(500);
-            let errMsg={
-                error:err
+            let errMsg = {
+                error: err
             }
             res.send(errMsg);
         }
@@ -50,38 +44,34 @@ app.get('/Candidates',(req, res) => {
     })
 });
 
-app.get('/Employees',(req, res) => {
-    let sql=' select * from Employees ';
-    if(req.query.id){
-        sql=sql+'where id='+req.query.id;
+app.get('/Employees', (req, res) => {
+    let sql = 'select * from Employees';
+    if (req.query.id) {
+        sql = sql + 'where id =' + req.query.id;
     }
-    if(req.query.employee_name){
-        sql=' select * from Employees where employee_name=? ';
-        connection.query(sql,[req.query.employee_name],(err,data) => {
-            if (err)
-            {
+    if (req.query.employee_name) {
+        sql = 'select * from Employees where employee_name=?';
+        connection.query(sql, [req.query.employee_name], (err,data) => {
+            if (err) {
                 res.send(err);
             }
             res.send(data);
         });
     }
-    if(req.query.employee_mbl)
-    {
-        sql=' select * from Employees where employee_mbl=? ';
-        connection.query(sql,[req.query.employee_mbl],(err,data) => {
-            if (err)
-            {
+    if(req.query.employee_mbl) {
+        sql = 'select * from Employees where employee_mbl=?';
+        connection.query(sql, [req.query.employee_mbl], (err,data) => {
+            if (err) {
                 res.send(err);
             }
             res.send(data);
         });
     }
-    connection.query(sql, function(err, data, fields){
-        if (err)
-        {
+    connection.query(sql, function(err, data, fields) {
+        if (err) {
             res.status(500);
-            let errMsg={
-                error:err
+            let errMsg = {
+                error: err
             }
             res.send(errMsg);
         }
@@ -92,32 +82,27 @@ app.get('/Employees',(req, res) => {
     })
 });
 
-app.get('/Trainee',(req, res) => {
-    let sql=' select * from Trainee ';
-    if(req.query.id)
-    {
-        sql=sql+'where id='+req.query.id;
+app.get('/Trainee', (req, res) => {
+    let sql = 'select * from Trainee';
+    if (req.query.id) {
+        sql = sql + 'where id=' + req.query.id;
     }
-    if(req.query.department)
-    {
-        sql=' select * from Trainee where department=? ';
-        connection.query(sql,[req.query.department],(err,data) => {
-            if (err)
-            {
+    if (req.query.department) {
+        sql = 'select * from Trainee where department=?';
+        connection.query(sql, [req.query.department], (err,data) => {
+            if (err) {
                 res.send(err);
             }
             res.send(data);
         });
     }
-    if(req.query.salary)
-    {
-        sql=sql+'where salary='+req.query.salary;
+    if (req.query.salary) {
+        sql = sql + 'where salary=' + req.query.salary;
     }
     connection.query(sql, function(err, data, fields){
-        if (err)
-        {
+        if (err) {
             res.status(500);
-            let errMsg={
+            let errMsg = { 
                 error: err
             }
             res.send(errMsg);
@@ -130,5 +115,5 @@ app.get('/Trainee',(req, res) => {
 });
 
 app.listen(port, () => {
-    console.log("started server....")
+    console.log("started server....");
 });
